@@ -1,0 +1,18 @@
+.form-control{
+	margin-bottom: 1em;
+}
+
+.btn{
+	display: block!important;
+	width: auto!important;
+    margin-right: auto;
+    margin-left: auto;
+    background: #337ab7!important;
+    color: white!important;
+}
+
+.users-form{
+	width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}

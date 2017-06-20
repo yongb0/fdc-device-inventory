@@ -1,0 +1,29 @@
+<div metal:define-macro="content" class="container">
+	<div class="users-form">
+		<h1>Add User</h1>
+		<tal:block tal:condition="php: isset(notification)"> 
+			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
+		</tal:block>
+		<form method="post" class="form-signin">
+			<label for="inputEmail" class="sr-only">Username</label>
+			<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder="Username" required="" />
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" name="data[User][password]" required="" id="inputPassword" class="form-control" placeholder="Password"/>
+			<label for="inputEmployeeID" class="sr-only">Employee ID</label>
+			<input type="text" name="data[User][employee_id]" id="inputEmployeeID" class="form-control" placeholder="Employee ID" required="" />
+			<label for="inputName" class="sr-only">Name</label>
+			<input type="text" name="data[User][name]" id="inputName" class="form-control" placeholder="Name"/>
+			<label for="inputNumber" class="sr-only">Number</label>
+			<input type="text" name="data[User][number]" id="inputNumber" class="form-control" placeholder="Number"/>
+			<select class="form-control" name="data[User][level]" >
+				<option value='0'>Admin</option>
+				<option value='1'>Employee</option>
+			</select>
+			<select class="form-control" name="data[User][status]" >
+				<option value='0'>Active</option>
+				<option value='1'>Inactive</option>
+			</select>
+			<input type="submit" value="Add User" class="btn btn-lg btn-primary btn-block" />
+		</form>
+	</div>
+</div>

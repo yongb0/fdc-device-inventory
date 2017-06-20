@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title tal:content="meta_title"></title>
+	<link href="/inventory/favicon.ico" type="image/x-icon" rel="shortcut icon" tal:attributes="href php: PhptalView::getCacheDisabledPath('/favicon.ico')" />
+	<link href="/css/cake.generic.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/cake.generic.css')" />
+	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/bootstrap.min.css')" />
+	<link href="/css/styles.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/styles.css')" />
+	<script src="/js/jquery.min.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/jquery.min.js')"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/bootstrap.min.js')"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<tal:block metal:use-macro="Global/Header/header.html/content"></tal:block>
+		</div>
+		<div id="content">
+			<tal:block metal:use-macro="${tmpl_contents}/content"></tal:block>
+		</div>
+		<div id="footer">
+			<tal:block metal:use-macro="Global/Footer/footer.html/content"></tal:block>
+		</div>
+	</div>
+</body>
+</html>

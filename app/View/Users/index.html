@@ -1,0 +1,20 @@
+<div metal:define-macro="content" class="container">
+    <h1>Users</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+        </tr>
+
+        <tr tal:repeat="user users">
+            <td tal:content="user/User/user_id" ></td>
+            <td tal:content="user/User/username"></td>
+            <td tal:content="user/User/name"></td>
+            <td tal:content="user/User/status"></td>
+            <td><a tal:define="user_id user/User/user_id" tal:condition="exists:actionUrl" tal:attributes="href php: actionUrl . '/' . user_id">Edit</a></td>
+        </tr>
+    </table>
+</div>
