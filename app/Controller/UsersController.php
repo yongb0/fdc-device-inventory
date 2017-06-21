@@ -18,7 +18,8 @@ class UsersController extends AppController {
         $this->_set_meta('Users','','');
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
-        $this->set('actionUrl', Router::url(array('controller' => strtolower($this->name), 'action' => 'edit')));
+        $this->set('actionEdit', Router::url(array('controller' => strtolower($this->name), 'action' => 'edit')));
+        $this->set('actionView', Router::url(array('controller' => strtolower($this->name), 'action' => 'view')));
     }
 
     public function view($id = null) {
@@ -28,42 +29,40 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid user'));
         }
 
-        $this->set('user', $this->User->findById($id));
+        $this->set('user', $this->User->findByUserId($id));
     }
 
     public function add() {
         $this->_set_meta('Add User','','');
+
         if ($this->request->is('post')) {
             $this->User->create();
             $this->User->set($this->request->data);
-            // print_r($this->User->validationErrors);
-            
             if ($this->User->save($this->request->data)) {
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->set('notification', array('The user could not be saved. Please, try again.', 'alert alert-danger'));
+        
+            $this->set('notification', array('The user could not be saved. Please see errors', 'alert alert-danger'));
         }
     }
 
-    public function edit($userID = null) {
-        $this->_set_meta('Users','','');
-        $this->User->id = $userID;
+    public function edit($id = null) {
+        $this->_set_meta('Edit User','','');
+        $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                $this->set('notification', array('The user has been saved', 'alert alert-success'));
             }
-            $this->Session->setFlash(
-                __('The user could not be saved. Please, try again.')
-            );
-        } else {
-            // $this->request->data = $this->User->findByUserId($userID);
-            print_r($this->User->findByUserId($userID));
-            // unset($this->request->data['User']['password']);
+            else{
+                $this->set('notification', array('The user could not be saved. Please, try again.', 'alert alert-danger'));
+            }
         }
+        $userData = $this->User->findByUserId($id);
+        $this->set('user', $userData);
+
     }
 
     public function delete($id = null) {
@@ -74,10 +73,10 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->User->delete()) {
-            $this->Flash->success(__('User deleted'));
+            // $this->Flash->success(__('User deleted'));
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Flash->error(__('User was not deleted'));
+        // $this->Flash->error(__('User was not deleted'));
         return $this->redirect(array('action' => 'index'));
     }
 

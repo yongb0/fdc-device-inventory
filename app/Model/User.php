@@ -10,14 +10,15 @@ class User extends AppModel {
                 'rule' => 'notEmpty',
                 'message' => 'Username is required'
             ),
-            'usernameExist' => array(
-                'rule' => 'usernameExist',
-                'message' => 'Username already exists'
+            'isUnique' => array(
+              'rule' => 'isUnique',
+              'message' => 'Username is already used.'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => 'notEmpty',
+                'on' => 'create',
                 'message' => 'Password is required'
             )
         ),
@@ -36,20 +37,22 @@ class User extends AppModel {
         )
     );
 
-    public function usernameExist($check) {
-        $existingUsers = $this->find('count', array(
-            'conditions' => $check,
-            'recursive' => -1
-        ));
-        return $existingUsers < 1;
-    }
+    // public function usernameExist($check) {
+    //     $existingUsers = $this->find('count', array(
+    //         'conditions' => $check,
+    //         'recursive' => -1
+    //     ));
+    //     return $existingUsers < 1;
+    // }
 
     public function beforeSave($options = array()) {
-        if (isset($this->data[$this->alias]['password'])) {
+        if (isset($this->data[$this->alias]['password']) && !empty($this->data[$this->alias]['password'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']
             );
+        } else {
+            unset($this->data[$this->alias]['password']);
         }
         return true;
     }

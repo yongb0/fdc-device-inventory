@@ -4,6 +4,7 @@ require_once(APP . 'Vendor/phptal/classes/PHPTAL.php');
 App::uses('View', 'View');
 App::uses('CakeLog', 'Log');
 
+
 class PhptalView extends View {
 
 	public $sharedPath = null;
@@ -19,6 +20,8 @@ class PhptalView extends View {
 		if ($controller !== null) {
 			$this->layoutDir= $controller->layoutDir;
 		}
+
+		$this->set('phptal', $this);
 	}
 
 	public function render($view = null, $layout = null) {

@@ -1,20 +1,49 @@
-<div metal:define-macro="content" class="container">
-    <h1>Users</h1>
-    <table>
+<div metal:define-macro="content" class="container list">
+    <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
+        <span class="pull-left">Users</span>
+        <a class="btn btn-primary pull-left add" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action'=>'add'),true)">
+            Add User
+        </a>
+    </h3>
+    
+    
+    <table class="table">
         <tr>
             <th>Id</th>
             <th>Username</th>
             <th>Name</th>
             <th>Status</th>
-            <th colspan="2">Action</th>
+            <th colspan="3">Action</th>
         </tr>
 
         <tr tal:repeat="user users">
             <td tal:content="user/User/user_id" ></td>
             <td tal:content="user/User/username"></td>
             <td tal:content="user/User/name"></td>
-            <td tal:content="user/User/status"></td>
-            <td><a tal:define="user_id user/User/user_id" tal:condition="exists:actionUrl" tal:attributes="href php: actionUrl . '/' . user_id">Edit</a></td>
+            <td tal:content="php: user['User']['status'] == 0 ? 'Active':'Inactive' "></td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Action
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a tal:define="user_id user/User/user_id" tal:condition="exists:actionEdit" tal:attributes="href php: actionEdit . '/' . user_id">
+                                Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a tal:define="user_id user/User/user_id" tal:condition="exists:actionView" tal:attributes="href php: actionView . '/' . user_id">
+                                View
+                            </a>
+                        </li>
+                        <li>
+                            <a tal:content="structure php: phptal.Form.postLink('Delete', array('action'=>'delete', user['User']['user_id']), array('confirm' => 'Do you want to delete?') )">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
         </tr>
     </table>
 </div>

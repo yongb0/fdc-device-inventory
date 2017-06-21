@@ -352,6 +352,7 @@ class View extends Object {
 		$this->Helpers = new HelperCollection($this);
 		$this->Blocks = new ViewBlock();
 		$this->loadHelpers();
+
 		parent::__construct();
 	}
 

@@ -1,14 +1,15 @@
 <div metal:define-macro="content" class="container">
 	<div class="users-form">
-		<h3>Add User</h3>
+		<h3>Edit User</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
 		</tal:block>
 		<form method="post" class="form-signin">
+			<input type="hidden" tal:attributes="value php: user['User']['user_id']" name="id" />
 			<div class="input-wrapper">
 				<label for="inputEmail" class="sr-only">Username</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.username') ? phptal.Form.error('User.username') : '' "></tal:block>
-				<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder="Username"  />
+				<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder="Username" tal:attributes="value php: user['User']['username'] " />
 			</div>
 			
 			<div class="input-wrapper">
@@ -20,38 +21,38 @@
 			<div class="input-wrapper">
 				<label for="inputEmployeeID" class="sr-only">Employee ID</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.employeeId') ? phptal.Form.error('User.employeeId') : '' "></tal:block>
-				<input type="text" name="data[User][employeeId]" id="inputEmployeeID" class="form-control" placeholder="Employee ID"  />
+				<input type="text" name="data[User][employeeId]" id="inputEmployeeID" class="form-control" placeholder="Employee ID" tal:attributes="value php: user['User']['employee_id']" />
 			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputName" class="sr-only">Name</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.name') ? phptal.Form.error('User.name') : '' "></tal:block>
-				<input type="text" name="data[User][name]" id="inputName" class="form-control" placeholder="Name"/>
+				<input type="text" name="data[User][name]" id="inputName" class="form-control" placeholder="Name" tal:attributes="value php: user['User']['name']"/>
 			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputNumber" class="sr-only">Number</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.number') ? phptal.Form.error('User.number') : '' "></tal:block>
-				<input type="text" name="data[User][number]" id="inputNumber" class="form-control" placeholder="Number"/>
+				<input type="text" name="data[User][number]" id="inputNumber" class="form-control" placeholder="Number" tal:attributes="value php: user['User']['number']"/>
 			</div>
 			
 			<div class="input-wrapper">
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.level') ? phptal.Form.error('User.level') : '' "></tal:block>
 				<select class="form-control" name="data[User][level]" >
-					<option value='0'>Admin</option>
-					<option value='1'>Employee</option>
+					<option value='0' tal:attributes="selected php: user['User']['employee_id'] == 0 ? true : '' ">Admin</option>
+					<option value='1' tal:attributes="selected php: user['User']['employee_id'] == 1 ? true : '' ">Employee</option>
 				</select>
 			</div>
 
 			<div class="input-wrapper">
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.status') ? $this->Form->error('User.status') : '' " ></tal:block>
 				<select class="form-control" name="data[User][status]" >
-					<option value='0'>Active</option>
-					<option value='1'>Inactive</option>
+					<option value='0' tal:attributes="selected php: user['User']['status'] == 0 ? true : '' ">Active</option>
+					<option value='1' tal:attributes="selected php: user['User']['status'] == 1 ? true : '' ">Inactive</option>
 				</select>
 			</div>
 
-			<input type="submit" value="Add User" class="btn btn-lg btn-primary btn-block" />
+			<input type="submit" value="Save User" class="btn btn-lg btn-primary btn-block" />
 		</form>
 	</div>
 </div>

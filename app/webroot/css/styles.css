@@ -1,8 +1,8 @@
 .form-control{
-	margin-bottom: 1em;
+	margin-bottom: 10px;
 }
 
-.btn{
+form .btn{
 	display: block!important;
 	width: auto!important;
     margin-right: auto;
@@ -15,4 +15,34 @@
 	width: 50%;
     margin-right: auto;
     margin-left: auto;
+}
+
+.input-wrapper{
+    margin-bottom:0px;
+    position:relative;
+}
+
+.error-message{
+    padding: 0px;
+    color:#a70404;
+    /*position: absolute;*/
+    /*top: -20px;*/
+
+}
+
+#header{
+    padding:0;
+}
+
+.list .btn.add{
+    margin-left:10px;
+}
+
+.list .table{
+    margin-top:5px;
+}
+
+.padding-0{
+    padding-left:0px;
+    padding-right:0px;
 }

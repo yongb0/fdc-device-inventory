@@ -1,0 +1,47 @@
+<div metal:define-macro="content" class="container list">
+	<!-- <tal:block tal:content="php: print_r(categories)" ></tal:block> -->
+    <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
+        <span class="pull-left">Devices</span>
+        <a class="btn btn-primary pull-left add" tal:attributes="href php: phptal.Html.url(array('controller' => 'devices','action'=>'add'),true)">
+            Add Devices
+        </a>
+    </h3>
+    
+    
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th colspan="3">Action</th>
+        </tr>
+
+        <tr tal:repeat="device devices">
+            <td tal:content="device/Device/name" ></td>
+            <td tal:content="device/Device/status"></td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Action
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a tal:define="device_id device/Device/device_id" tal:condition="exists:actionEdit" tal:attributes="href php: actionEdit . '/' . device_id">
+                                Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a tal:define="device_id device/Device/device_id" tal:condition="exists:actionView" tal:attributes="href php: actionView . '/' . device_id">
+                                View
+                            </a>
+                        </li>
+                        <li>
+                            <a tal:content="structure php: phptal.Form.postLink('Delete', array('action'=>'delete', device['Device']['device_id']), array('confirm' => 'Do you want to delete?') )">
+                            </a>
+                          
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

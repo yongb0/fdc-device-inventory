@@ -1,0 +1,23 @@
+<div metal:define-macro="content" class="container">
+	<div class="users-form">
+		<h3>Add Device Category</h3>
+		<tal:block tal:condition="php: isset(notification)"> 
+			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
+		</tal:block>
+		<form method="post" class="form-signin">
+			<div class="input-wrapper">
+				<label for="inputName" class="sr-only">Name</label>
+				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('DeviceCategory.name') ? phptal.Form.error('DeviceCategory.name') : '' "></tal:block>
+				<input type="text" name="data[DeviceCategory][name]" id="inputName" class="form-control" placeholder="Name"  />
+			</div>
+			
+			<div class="input-wrapper">
+				<label for="inputDescription" class="sr-only">Description</label>
+				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('DeviceCategory.description') ? phptal.Form.error('DeviceCategory.description') : '' "></tal:block>
+				<input type="text" name="data[DeviceCategory][description]"  id="inputDescription" class="form-control" placeholder="Description"/>
+			</div>
+
+			<input type="submit" value="Add Category" class="btn btn-lg btn-primary btn-block" />
+		</form>
+	</div>
+</div>
