@@ -85,7 +85,11 @@ class UsersController extends AppController {
         $this->layout = 'login';
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
+                if($this->Auth->User('level')==0){
+                    return $this->redirect($this->Auth->redirectUrl());
+                }else{
+                    return $this->redirect(array('controller' => 'devices', 'action' => 'index'));
+                }
             }
             $this->set('notification', array('Invalid username and password', 'alert alert-danger'));
         }

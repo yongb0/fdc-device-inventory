@@ -30,6 +30,8 @@
 
 	Router::connect('/device-categories/:action/*', ['controller' => 'deviceCategories']);
 
+	Router::connect('/borrow/return-device/:id', array('controller' => 'borrow', 'action' => 'returnDevice'), array('id' => '\d+', 'pass' => ['id']) );
+
 
 	// Router::connect('/users/delete/:id', array('controller' => 'users', 'action' => 'delete'));
 

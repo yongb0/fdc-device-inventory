@@ -1,6 +1,6 @@
 <div metal:define-macro="content" class="container">
 	<div class="users-form">
-		<h3>Add Device</h3>
+		<h3>Edit Device</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
 		</tal:block>
@@ -8,13 +8,13 @@
 			<div class="input-wrapper">
 				<label for="inputName" class="sr-only">Name</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.name') ? phptal.Form.error('Device.name') : '' "></tal:block>
-				<input type="text" name="data[Device][name]" id="inputName" class="form-control" placeholder="Name"  />
+				<input type="text" name="data[Device][name]" id="inputName" class="form-control" placeholder="Name" value="${device/Device/name | nothing}" />
 			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputDescription" class="sr-only">Details</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.details') ? phptal.Form.error('Device.details') : '' "></tal:block>
-				<input type="text" name="data[Device][details]"  id="inputDescription" class="form-control" placeholder="Details"/>
+				<input type="text" name="data[Device][details]"  id="inputDescription" class="form-control" placeholder="Details" value="${device/Device/details | nothing}"/>
 			</div>
 
 
@@ -22,7 +22,7 @@
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.category_id') ? phptal.Form.error('Device.category_id') : '' "></tal:block>
 				<select class="form-control" name="data[Device][category_id]" >
 					<tal:block tal:repeat="category categories">
-						<option value='0' tal:content="category/DeviceCategory/name" tal:attributes="value category/DeviceCategory/category_id" >Name</option>
+						<option value='0' tal:content="category/DeviceCategory/name" tal:attributes="value category/DeviceCategory/category_id; selected php: device['Device']['category_id'] EQ category['DeviceCategory']['category_id'] ? true : '' " >Name</option>
 					</tal:block>
 				</select>
 			</div>
@@ -30,12 +30,12 @@
 			<div class="input-wrapper">
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.status') ? $this->Form->error('Device.status') : '' " ></tal:block>
 				<select class="form-control" name="data[Device][status]" >
-					<option value='0'>Active</option>
-					<option value='1'>Inactive</option>
+					<option value='0' tal:attributes="selected php: device['Device']['status'] == 0 ? true : '' ">Active</option>
+					<option value='1' tal:attributes="selected php: device['Device']['status'] == 1 ? true : '' ">Inactive</option>
 				</select>
 			</div>
 
-			<input type="submit" value="Add Category" class="btn btn-lg btn-primary btn-block" />
+			<input type="submit" value="Save Device" class="btn btn-lg btn-primary btn-block" />
 		</form>
 	</div>
 </div>

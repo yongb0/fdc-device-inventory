@@ -1,0 +1,18 @@
+<div metal:define-macro="content" class="container">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Name</th>
+				<td tal:condition="exists:device/Device/name" tal:content="device/Device/name">name</td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td tal:content="device/Device/description | nothing">details</td>
+			</tr>
+			<tr>
+				<th>Category</th>
+				<td tal:content="device/DeviceCategory/name | nothing">category</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

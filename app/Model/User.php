@@ -4,6 +4,13 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 class User extends AppModel {
     public $primaryKey = 'user_id';
+    public $hasMany =  array(
+        'Borrower' => array(
+            'className' => 'Borrower',
+            'foreignKey' => 'user_id'
+        )
+    );
+
     public $validate = array(
         'username' => array(
             'required' => array(

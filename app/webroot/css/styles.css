@@ -1,3 +1,16 @@
+/*-------------- header ----------------*/
+
+#header{
+    padding:0;
+}
+
+#header .navbar{
+    padding: 0em 2em;
+}
+
+
+/*-------------- form ----------------*/
+
 .form-control{
 	margin-bottom: 10px;
 }
@@ -25,24 +38,41 @@ form .btn{
 .error-message{
     padding: 0px;
     color:#a70404;
-    /*position: absolute;*/
-    /*top: -20px;*/
-
 }
 
-#header{
-    padding:0;
+/*-------------- tables ----------------*/
+.list .table{
+    margin-top:5px;
+}
+
+.tab-content table, .tab-content table th{
+    border-top:0px!important;
+}
+
+.tab-content table{
+    margin-top:1.5em!important;
+}
+
+/*-------------- others ----------------*/
+
+.padding-0{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
 }
 
 .list .btn.add{
     margin-left:10px;
 }
 
-.list .table{
-    margin-top:5px;
-}
 
-.padding-0{
-    padding-left:0px;
-    padding-right:0px;
+.list h3{
+    margin-bottom:1em;
 }

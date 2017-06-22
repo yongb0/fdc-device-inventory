@@ -16,20 +16,35 @@ class DevicesController extends AppController {
 
     public function index() {
         $this->_set_meta('Devices','','');
-        $this->Device->recursive = 0;
-        $this->set('devices', $this->paginate());
-        // $this->set('actionEdit', Router::url(Router::url(array('controller' => strtolower($this->name), 'action' => 'edit'))));
-        // $this->set('actionView', Router::url(Router::url(array('controller' => strtolower($this->name), 'action' => 'view'))));
+        $categories = new DeviceCategory();
+        $categoriesData = $categories->find('all',['fields' => ['name','category_id']]);
+        $borrower = $this->Device->Borrower->find('all', array(
+            'fields' => array('Borrower.device_id','borrowed_date','return_date','User.employee_id','User.name','User.user_id'),
+            'conditions'=>array('return_date'=>'0000-00-00 00:00:00'),
+            'key' => 'Borrower.device_id'                                                              
+        ));
+        $borrower = Hash::combine($borrower, '{n}.Borrower.device_id', '{n}');
+        $this->set('borrower', $borrower);
+        $this->set('categories', $categoriesData);
+
+        if($this->userEmployee() || $this->userAdmin()){
+            $this->set('actionView', Router::url(array('controller' => strtolower($this->name), 'action' => 'view')));
+        }
+
+        if($this->userAdmin()){
+            $this->set('actionEdit', Router::url(array('controller' => strtolower($this->name), 'action' => 'edit')));
+        }
+
     }
 
     public function view($id = null) {
-        $this->_set_meta('Users','','');
+        $this->_set_meta('Devices','','');
         $this->Device->id = $id;
         if (!$this->Device->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+            throw new NotFoundException(__('Invalid device'));
         }
 
-        $this->set('user', $this->User->findByUserId($id));
+        $this->set('device', $this->Device->findByDeviceId($id));
     }
 
     public function add() {
@@ -56,21 +71,30 @@ class DevicesController extends AppController {
     }
 
     public function edit($id = null) {
-        $this->_set_meta('Edit Device Category','','');
-        $this->DeviceCategory->id = $id;
-        if (!$this->DeviceCategory->exists()) {
-            throw new NotFoundException(__('Invalid Category'));
+        $categories = new DeviceCategory();
+        $this->set(
+            'categories',
+            $categories->find('all',[
+                'recursive' => -1,
+                'contain' => [],
+                'fields' => ['name','category_id']
+            ])
+        );
+        $this->_set_meta('Edit Device','','');
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            throw new NotFoundException(__('Invalid Device'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->DeviceCategory->save($this->request->data)) {
-                $this->set('notification', array('The category has been saved', 'alert alert-success'));
+            if ($this->Device->save($this->request->data)) {
+                $this->set('notification', array('The device has been saved', 'alert alert-success'));
             }
             else{
-                $this->set('notification', array('The category could not be saved. Please, try again.', 'alert alert-danger'));
+                $this->set('notification', array('The device could not be saved. Please, try again.', 'alert alert-danger'));
             }
         }
-        $categoryData = $this->DeviceCategory->findByCategoryId($id);
-        $this->set('categories', $categoryData);
+        $deviceData = $this->Device->findByDeviceId($id);
+        $this->set('device', $deviceData);
 
     }
 
@@ -82,11 +106,21 @@ class DevicesController extends AppController {
             throw new NotFoundException(__('Invalid Category'));
         }
         if ($this->DeviceCategory->delete()) {
-            // $this->Flash->success(__('User deleted'));
             return $this->redirect(array('action' => 'index'));
         }
-        // $this->Flash->error(__('User was not deleted'));
         return $this->redirect(array('action' => 'index'));
+    }
+
+    public function isAuthorized($user)
+    {
+        if ($this->action === 'index' || $this->action === 'view') {
+            if (isset($user['level']) && $user['level'] === '1') {
+                $this->layout = 'employee';
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
     }
 
 }
