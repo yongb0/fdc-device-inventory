@@ -1,0 +1,24 @@
+<div metal:define-macro="content" class="container list">
+    <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
+        <span class="pull-left">Device Usage <span tal:condition="exists:  deviceUsages/0/Device/name" tal:define="name deviceUsages/0/Device/name | nothing" tal:content="string: : ${name} "> Device Name</span> </span>
+    </h3>
+    
+    <table class="table">
+        <tr>
+            <th>Borrowed Date/Time</th>
+            <th>Returned Date/Time</th>
+            <th>User</th>
+            <th>Employee ID</th>
+        </tr>
+
+        <tr tal:repeat="deviceUsage deviceUsages">
+            <td tal:define="borrowDate deviceUsage/Borrower/borrowed_date | nothing" tal:content="php: date('F jS, Y, g:i a', strtotime(borrowDate))" > Borrowed Date</td>
+            <td tal:define="returnDate deviceUsage/Borrower/return_date | nothing" tal:content="php: date('F jS, Y, g:i a', strtotime(returnDate))"> Return Date</td>
+            <td tal:content="deviceUsage/User/name"> Name </td>
+            <td tal:content="deviceUsage/User/employee_id"> Employee ID </td>
+        </tr>
+    </table>
+
+    <tal:block metal:use-macro="Global/paginate.html/paginate"></tal:block>
+    
+</div>

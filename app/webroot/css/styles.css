@@ -22,12 +22,30 @@ form .btn{
     margin-left: auto;
     background: #337ab7!important;
     color: white!important;
+    text-shadow: none;
+    box-shadow: none;
 }
 
 .users-form{
-	width: 50%;
+	width: 30em;
     margin-right: auto;
     margin-left: auto;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    border: 1px solid #cccccc;
+    padding: 3em 2em 5em;
+    border-radius: 10px;
+}
+
+.users-form .form-signin-heading{
+    margin: 0px 0px 20px;
+    color: #464646;
+}
+
+.users-form input[type='submit']{
+    margin-top: 20px;
 }
 
 .input-wrapper{
@@ -40,9 +58,15 @@ form .btn{
     color:#a70404;
 }
 
+.add-form{
+    width: 30em;
+    margin-right: auto;
+    margin-left: auto;
+}
 /*-------------- tables ----------------*/
 .list .table{
     margin-top:5px;
+    border: 1px solid #dddddd;
 }
 
 .tab-content table, .tab-content table th{
@@ -51,6 +75,7 @@ form .btn{
 
 .tab-content table{
     margin-top:1.5em!important;
+    border:0px!important;
 }
 
 /*-------------- others ----------------*/
@@ -69,10 +94,42 @@ form .btn{
 }
 
 .list .btn.add{
-    margin-left:10px;
+    margin-left: 6px;
+    top: 5px;
+    position: relative;
+    border: none;
+    font-size: 16px;
+    padding: 0px;
+    color: #337ab7;
+}
+
+.list .btn.add:hover{
+    background:transparent;
+    color:#cccccc;
 }
 
 
 .list h3{
     margin-bottom:1em;
+}
+
+ul.list-details{
+    margin-top: 2em;
+}
+
+ul.list-details li{
+    margin:5px 0px;
+}
+
+ul.list-details li.title{
+    font-weight:600;
+}
+
+ul.col-2 li{
+    width:49.5%;
+    vertical-align: middle;
+}
+
+#change-password .modal-body{
+    padding: 15px 50px;
 }

@@ -1,0 +1,8 @@
+<tal:block metal:define-macro="paginate">
+	<tal:block tal:content="php: isset(phptal.passedArgs[0]) ? phptal.Paginator.options(array('url' => array(phptal.passedArgs[0]))) : '' "> </tal:block>
+	<div class="text-center">
+	    <ul class="pagination">
+	        <tal:block tal:content="structure php: phptal.Paginator.numbers(array('tag'=>'li','separator'=>'','currentTag'=> 'a','currentClass'=>'active'))"></tal:block>
+	    </ul>
+	</div>
+</tal:block>

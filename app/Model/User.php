@@ -7,7 +7,8 @@ class User extends AppModel {
     public $hasMany =  array(
         'Borrower' => array(
             'className' => 'Borrower',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent' => true
         )
     );
 
@@ -29,10 +30,16 @@ class User extends AppModel {
                 'message' => 'Password is required'
             )
         ),
-        'employeeId' => array(
+        'employee_id' => array(
             'required' => array(
                 'rule' => 'notEmpty',
                 'message' => 'Employee ID is required'
+            )
+        ),
+        'name' => array(
+            'required' => array(
+                'rule' => 'notEmpty',
+                'message' => 'Name is required'
             )
         ),
         'level' => array(
@@ -43,14 +50,6 @@ class User extends AppModel {
             )
         )
     );
-
-    // public function usernameExist($check) {
-    //     $existingUsers = $this->find('count', array(
-    //         'conditions' => $check,
-    //         'recursive' => -1
-    //     ));
-    //     return $existingUsers < 1;
-    // }
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password']) && !empty($this->data[$this->alias]['password'])) {

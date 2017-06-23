@@ -35,7 +35,12 @@ App::uses('PhptalView', 'View');
 
 class AppController extends Controller {
 
-	public $helpers = array('Html', 'Form', 'Session');
+	public $helpers = array(
+        'Html', 
+        'Form', 
+        'Session'
+    );
+
 	public $viewClass = 'Phptal';
 	public $ext = '.html';
 
@@ -66,6 +71,7 @@ class AppController extends Controller {
         }else if( $this->userAdmin()){
             $this->set('role', 'admin');
         }
+        $this->set('currentUrl',Router::url(null));
     }
 
     public function isAuthorized($user)
@@ -94,4 +100,5 @@ class AppController extends Controller {
 
         return false;
     }
+    
 }

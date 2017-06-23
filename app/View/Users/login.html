@@ -1,6 +1,6 @@
 <div metal:define-macro="content" class="container">
 	<div class="users-form">
-		<h3 class="form-signin-heading">Sign in</h3>
+		<h3 class="form-signin-heading text-center">Sign in</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
 		</tal:block>
@@ -9,7 +9,7 @@
 			<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder="Username" required="" />
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input type="password" name="data[User][password]" required="" id="inputPassword" class="form-control" placeholder="Password"/>
-			<input type="submit" value="Login" class="btn btn-lg btn-primary btn-block" />
+			<input type="submit" value="Login" class="btn btn-primary btn-block" />
 		</form>
 	</div>
 </div>

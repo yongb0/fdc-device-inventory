@@ -2,8 +2,8 @@
 	<!-- <tal:block tal:content="php: print_r(categories)" ></tal:block> -->
     <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
         <span class="pull-left">Device Categories</span>
-        <a class="btn btn-primary pull-left add" tal:attributes="href php: phptal.Html.url('/device-categories/add',true)">
-            Add Category
+        <a class="btn btn-default pull-left add" tal:attributes="href php: phptal.Html.url('/device-categories/add',true)">
+            <i class="glyphicon glyphicon-plus-sign" />
         </a>
     </h3>
     
@@ -44,4 +44,5 @@
             </td>
         </tr>
     </table>
+    <tal:block metal:use-macro="Global/paginate.html/paginate"></tal:block>
 </div>

@@ -1,30 +1,18 @@
 <div metal:define-macro="content" class="container">
-	<table class="table">
-		<tbody>
-			<tr>
-				<td>Username</td>
-				<td tal:condition="exists:user/User/username" tal:content="user/User/username">username</td>
-			</tr>
-			<tr>
-				<td>Employee ID</td>
-				<td tal:condition="exists:user/User/employee_id" tal:content="user/User/employee_id">employee id</td>
-			</tr>
-			<tr>
-				<td>Name</td>
-				<td tal:condition="exists:user/User/name" tal:content="user/User/name">name</td>
-			</tr>
-			<tr>
-				<td>Number</td>
-				<td tal:condition="exists:user/User/number" tal:content="user/User/number">name</td>
-			</tr>
-			<tr>
-				<td>Level</td>
-				<td tal:condition="exists:user/User/level" tal:content="php: user['User']['level'] == 0 ? 'Admin':'Employee' ">level</td>
-			</tr>
-			<tr>
-				<td>Status</td>
-				<td tal:condition="exists:user/User/status" tal:content="php: user['User']['status'] == 0 ? 'Active':'Inactive' ">status</td>
-			</tr>
-		</tbody>
-	</table>
+	<h3>User information</h3>
+	<ul class="list-inline col-md-12 col-sm-12 col-xs-12 list-details col-2">
+		<li class="title">Username: </li>
+		<li tal:condition="exists:user/User/username" tal:content="user/User/username">username</li>
+		<li class="title">Employee ID: </li>
+		<li tal:condition="exists:user/User/employee_id" tal:content="user/User/employee_id">employee id</li>
+		<li class="title">Name: </li>
+		<li tal:condition="exists:user/User/name" tal:content="user/User/name">name</li>
+		<li class="title">Number:</li>
+		<li tal:condition="exists:user/User/number" tal:content="user/User/number">number</li>
+		<li class="title">Level:</li>
+		<li tal:condition="exists:user/User/level" tal:content="php: user['User']['level'] == 0 ? 'Admin':'Employee' ">level</li>
+		<li class="title">Status:</li>
+		<li tal:condition="exists:user/User/status" tal:content="php: user['User']['status'] == 0 ? 'Active':'Inactive' ">status</li>
+	</ul>
 </div>
+

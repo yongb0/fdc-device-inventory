@@ -1,0 +1,45 @@
+<div metal:define-macro="content" class="container">
+	<!-- modal for changing password -->
+	<div id="change-password" class="modal fade" role="dialog">
+	  	<div class="modal-dialog" >
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Change Password</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form method="post">
+		        	<div class="input-wrapper">
+						<label for="inputPassword" class="sr-only">Password</label>
+						<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.password') ? phptal.Form.error('User.password') : '' "></tal:block>
+						<input type="password" name="data[User][password]"  id="inputPassword" class="form-control" placeholder="Password" required="" />
+					</div>
+					<input type="submit" value="Change" class="btn btn-primary btn-block" />
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+	  	</div>
+	</div>
+
+	<tal:block tal:condition="php: isset(notification)"> 
+		<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
+	</tal:block>
+	
+	<!-- showing profile -->
+	<h3>My Profile</h3>
+	<ul class="list-inline col-md-12 col-sm-12 col-xs-12 list-details col-2">
+		<li class="title">Name: </li>
+		<li class="" tal:content="php: phptal.Session.read('Auth.User.name')">Your name</li>
+		<li class="title">Username: </li>
+		<li class="" tal:content="php: phptal.Session.read('Auth.User.username')">Your username</li>
+		<li class="title">Employee ID: </li>
+		<li class="" tal:content="php: phptal.Session.read('Auth.User.employee_id')">Your employee ID</li>
+		<li class="title">Number:</li>
+		<li class="" tal:content="php: phptal.Session.read('Auth.User.number')">Your number</li>
+		<li class="title">Password:</li>
+		<li class=""><button type="button" data-toggle="modal" data-target="#change-password" class="btn btn-primary">Change password</button></li>
+	</ul>
+</div>

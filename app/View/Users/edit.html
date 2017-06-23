@@ -1,5 +1,5 @@
 <div metal:define-macro="content" class="container">
-	<div class="users-form">
+	<div class="add-form">
 		<h3>Edit User</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
@@ -20,8 +20,8 @@
 
 			<div class="input-wrapper">
 				<label for="inputEmployeeID" class="sr-only">Employee ID</label>
-				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.employeeId') ? phptal.Form.error('User.employeeId') : '' "></tal:block>
-				<input type="text" name="data[User][employeeId]" id="inputEmployeeID" class="form-control" placeholder="Employee ID" tal:attributes="value php: user['User']['employee_id']" />
+				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.employee_id') ? phptal.Form.error('User.employee_id') : '' "></tal:block>
+				<input type="text" name="data[User][employee_id]" id="inputEmployeeID" class="form-control" placeholder="Employee ID" tal:attributes="value php: user['User']['employee_id']" />
 			</div>
 			
 			<div class="input-wrapper">
@@ -39,8 +39,8 @@
 			<div class="input-wrapper">
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.level') ? phptal.Form.error('User.level') : '' "></tal:block>
 				<select class="form-control" name="data[User][level]" >
-					<option value='0' tal:attributes="selected php: user['User']['employee_id'] == 0 ? true : '' ">Admin</option>
-					<option value='1' tal:attributes="selected php: user['User']['employee_id'] == 1 ? true : '' ">Employee</option>
+					<option value='0' tal:attributes="selected php: user['User']['level'] == 0 ? true : '' ">Admin</option>
+					<option value='1' tal:attributes="selected php: user['User']['level'] == 1 ? true : '' ">Employee</option>
 				</select>
 			</div>
 

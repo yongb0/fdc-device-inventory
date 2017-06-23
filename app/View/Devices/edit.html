@@ -1,5 +1,5 @@
 <div metal:define-macro="content" class="container">
-	<div class="users-form">
+	<div class="add-form">
 		<h3>Edit Device</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 

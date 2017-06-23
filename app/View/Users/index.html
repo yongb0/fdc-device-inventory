@@ -1,8 +1,8 @@
 <div metal:define-macro="content" class="container list">
     <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
         <span class="pull-left">Users</span>
-        <a class="btn btn-primary pull-left add" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action'=>'add'),true)">
-            Add User
+        <a class="btn btn-default pull-left add" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action'=>'add'),true)">
+            <i class="glyphicon glyphicon-plus-sign" />
         </a>
     </h3>
     
@@ -13,7 +13,7 @@
             <th>Username</th>
             <th>Name</th>
             <th>Status</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
 
         <tr tal:repeat="user users">
@@ -46,4 +46,5 @@
             </td>
         </tr>
     </table>
+   <tal:block metal:use-macro="Global/paginate.html/paginate"></tal:block>
 </div>

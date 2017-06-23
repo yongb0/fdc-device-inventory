@@ -1,18 +1,12 @@
 <div metal:define-macro="content" class="container">
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Name</th>
-				<td tal:condition="exists:device/Device/name" tal:content="device/Device/name">name</td>
-			</tr>
-			<tr>
-				<th>Details</th>
-				<td tal:content="device/Device/description | nothing">details</td>
-			</tr>
-			<tr>
-				<th>Category</th>
-				<td tal:content="device/DeviceCategory/name | nothing">category</td>
-			</tr>
-		</tbody>
-	</table>
+	<h3>Device Category Information</h3>
+	<ul class="list-inline col-md-12 col-sm-12 col-xs-12 list-details col-2">
+		<li class="title">Name: </li>
+		<li tal:condition="exists:device/Device/name" tal:content="device/Device/name">name</li>
+		<li class="title">Details</li>
+		<li tal:content="device/Device/description | nothing">details</li>
+		<li class="title">Category</li>
+		<li tal:content="device/DeviceCategory/name | nothing">category</li>
+	</ul>
 </div>
+

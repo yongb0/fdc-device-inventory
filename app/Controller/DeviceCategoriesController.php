@@ -72,10 +72,8 @@ class DeviceCategoriesController extends AppController {
             throw new NotFoundException(__('Invalid Category'));
         }
         if ($this->DeviceCategory->delete()) {
-            // $this->Flash->success(__('User deleted'));
             return $this->redirect(array('action' => 'index'));
         }
-        // $this->Flash->error(__('User was not deleted'));
         return $this->redirect(array('action' => 'index'));
     }
 

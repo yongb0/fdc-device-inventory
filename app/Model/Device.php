@@ -13,7 +13,8 @@ class Device extends AppModel {
    	public $hasMany =  array(
         'Borrower' => array(
             'className' => 'Borrower',
-            'foreignKey' => 'device_id'
+            'foreignKey' => 'device_id',
+            'dependent' => true
         )
     );
     public $validate = array(

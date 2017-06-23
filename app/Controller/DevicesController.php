@@ -19,7 +19,7 @@ class DevicesController extends AppController {
         $categories = new DeviceCategory();
         $categoriesData = $categories->find('all',['fields' => ['name','category_id']]);
         $borrower = $this->Device->Borrower->find('all', array(
-            'fields' => array('Borrower.device_id','borrowed_date','return_date','User.employee_id','User.name','User.user_id'),
+            'fields' => array('Borrower.device_id','borrowed_date','return_date','User.employee_id','User.name','User.user_id','borrower_id'),
             'conditions'=>array('return_date'=>'0000-00-00 00:00:00'),
             'key' => 'Borrower.device_id'                                                              
         ));
@@ -95,17 +95,16 @@ class DevicesController extends AppController {
         }
         $deviceData = $this->Device->findByDeviceId($id);
         $this->set('device', $deviceData);
-
     }
 
     public function delete($id = null) {
         $this->_set_meta('Delete Category','','');
         $this->request->allowMethod('post');
-        $this->DeviceCategory->id = $id;
-        if (!$this->DeviceCategory->exists()) {
-            throw new NotFoundException(__('Invalid Category'));
+        $this->Device->id = $id;
+        if (!$this->Device->exists()) {
+            throw new NotFoundException(__('Invalid Device'));
         }
-        if ($this->DeviceCategory->delete()) {
+        if ($this->Device->delete()) {
             return $this->redirect(array('action' => 'index'));
         }
         return $this->redirect(array('action' => 'index'));
@@ -119,7 +118,6 @@ class DevicesController extends AppController {
                 return true;
             }
         }
-
         return parent::isAuthorized($user);
     }
 

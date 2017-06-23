@@ -24,16 +24,16 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'users', 'action' => 'index'));
+	
+	Router::redirect('/', array('controller' => 'users', 'action' => 'index'));
 	
 	Router::connect('/device-categories', ['controller' => 'deviceCategories']);
 
 	Router::connect('/device-categories/:action/*', ['controller' => 'deviceCategories']);
 
-	Router::connect('/borrow/return-device/:id', array('controller' => 'borrow', 'action' => 'returnDevice'), array('id' => '\d+', 'pass' => ['id']) );
+	Router::connect('/borrow/:action/*', array('controller' => 'borrowers') );
 
-
-	// Router::connect('/users/delete/:id', array('controller' => 'users', 'action' => 'delete'));
+	Router::connect('/borrow/return-device/:id', array('controller' => 'borrowers', 'action' => 'returnDevice'), array('id' => '\d+', 'pass' => ['id']) );
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

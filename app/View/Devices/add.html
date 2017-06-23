@@ -1,5 +1,5 @@
 <div metal:define-macro="content" class="container">
-	<div class="users-form">
+	<div class="add-form">
 		<h3>Add Device</h3>
 		<tal:block tal:condition="php: isset(notification)"> 
 			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
@@ -35,7 +35,7 @@
 				</select>
 			</div>
 
-			<input type="submit" value="Add Category" class="btn btn-lg btn-primary btn-block" />
+			<input type="submit" value="Add Device" class="btn btn-primary btn-block" />
 		</form>
 	</div>
 </div>
