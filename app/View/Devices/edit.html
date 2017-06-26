@@ -8,17 +8,18 @@
 			<div class="input-wrapper">
 				<label for="inputName" class="sr-only">Name</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.name') ? phptal.Form.error('Device.name') : '' "></tal:block>
-				<input type="text" name="data[Device][name]" id="inputName" class="form-control" placeholder="Name" value="${device/Device/name | nothing}" />
+				<input type="text" name="data[Device][name]" id="inputName" class="form-control" placeholder="" value="${device/Device/name | nothing}" />
 			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputDescription" class="sr-only">Details</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.details') ? phptal.Form.error('Device.details') : '' "></tal:block>
-				<input type="text" name="data[Device][details]"  id="inputDescription" class="form-control" placeholder="Details" value="${device/Device/details | nothing}"/>
+				<input type="text" name="data[Device][details]"  id="inputDescription" class="form-control" placeholder="" value="${device/Device/details | nothing}"/>
 			</div>
 
 
 			<div class="input-wrapper">
+				<label for="inputDescription" class="sr-only">Category</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.category_id') ? phptal.Form.error('Device.category_id') : '' "></tal:block>
 				<select class="form-control" name="data[Device][category_id]" >
 					<tal:block tal:repeat="category categories">
@@ -28,6 +29,7 @@
 			</div>
 
 			<div class="input-wrapper">
+				<label for="inputDescription" class="sr-only">Status</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.status') ? $this->Form->error('Device.status') : '' " ></tal:block>
 				<select class="form-control" name="data[Device][status]" >
 					<option value='0' tal:attributes="selected php: device['Device']['status'] == 0 ? true : '' ">Active</option>

@@ -5,7 +5,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login','logout');
+        $this->Auth->allow('login','logout','account');
     }
 
     private function _set_meta ($title,$description,$keywords) {
@@ -101,6 +101,9 @@ class UsersController extends AppController {
     public function account() {
         $this->_set_meta('Profile','','');
         $this->User->id = $this->Auth->User('user_id');
+        if($this->userEmployee()){
+            $this->layout='employee';
+        }
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
@@ -112,6 +115,46 @@ class UsersController extends AppController {
                 $this->set('notification', array('Error in updating. Please, try again.', 'alert alert-danger'));
             }
         }
+    }
+
+    public function search() {
+        $this->autoRender = false;
+        if( $this->request->is('ajax') ) {
+            $keyword = $this->request->data('keyword');
+    
+            $users = $this->User->find('all',
+                array(
+                    'recursive' =>  -1,
+                    'conditions' => array(
+                       "OR" => array(
+                            "name LIKE" => "%".$this->request->data['keyword']."%",
+                            "username LIKE" => "%".$this->request->data['keyword']."%",
+                            "employee_id LIKE" => "%".$this->request->data['keyword']."%",
+                        ) 
+                    ),
+                    'fields' => array('username','name','employee_id','user_id')
+                )
+            );
+            return json_encode($users);
+        }
+        // echo "haahah";
+        // $this->request->is('post');
+        // $this->view='index';
+        // if ($this->request->is('ajax') && isset($this->request->data['keyword']) && !empty($this->request->data['keyword'])  ) {
+            // $users = $this->User->find('all',
+            //     array(
+            //         'conditions' => array(
+            //            "OR" => array(
+            //                 "name LIKE" => "%".$this->request->data['keyword']."%",
+            //                 "username LIKE" => "%".$this->request->data['keyword']."%",
+            //                 "employee_id LIKE" => "%".$this->request->data['keyword']."%",
+            //             ) 
+            //         )
+            //     )
+            // );
+            // $this->set('users', $this->paginate());
+        // }
+        // return json_encode($this->data);
     }
 
     public function logout() {

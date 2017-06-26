@@ -49,6 +49,40 @@ class BorrowersController extends AppController {
 
     }
 
+    public function add($id = null) {
+        $this->_set_meta('Borrow Device','','');
+        if ($this->request->is('post')) {
+            $this->Borrower->Device->id = $id;
+            $this->Borrower->User->id = isset($this->request->data['Borrower']['user_id'])? $this->request->data['Borrower']['user_id'] : '' ;
+            if($id != null ){
+                if (!$this->Borrower->Device->exists()) {
+                    $this->set('notification', array('Invalid Device', 'alert alert-danger'));
+                }else{
+                    if (!$this->Borrower->User->exists()) {
+                        $this->set('notification', array('Unknown User', 'alert alert-danger'));
+                    }else{
+                        $this->Borrower->create();
+                        $db = $this->Borrower->getDataSource(); 
+                        $this->Borrower->set(array(
+                            'device_id' => $id,
+                            'user_id' => $this->request->data['Borrower']['user_id'],
+                            'borrowed_date' => $db->expression('NOW()')
+                        ));
+                        if ($this->Borrower->save()) {
+                            return $this->redirect(array('controller'=>'devices', 'action' => 'index'));
+                        }else{
+                            $this->set('notification', array('There\'s a problem in borrowing the device', 'alert alert-danger'));
+                        }
+                    }
+                }
+            }
+            // 
+        }
+        $deviceData = $this->Borrower->Device->findByDeviceId($id);
+        $this->set('device', $deviceData);
+
+    }
+
     public function returnDevice($id = null) {
         $this->_set_meta('Return Device','','');
         $this->request->allowMethod('post');

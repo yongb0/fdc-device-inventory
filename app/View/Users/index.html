@@ -4,10 +4,13 @@
         <a class="btn btn-default pull-left add" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action'=>'add'),true)">
             <i class="glyphicon glyphicon-plus-sign" />
         </a>
+        <!-- <form id="search-form" action="">
+            <input type="text" name="keyword" data-fetch="users" class="form-control search" placeholder=""  />
+        </form> -->
     </h3>
     
     
-    <table class="table">
+    <table class="table" id="context">
         <tr>
             <th>Id</th>
             <th>Username</th>

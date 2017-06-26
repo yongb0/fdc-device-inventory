@@ -6,36 +6,37 @@
 		</tal:block>
 		<form method="post" class="form-signin">
 			<div class="input-wrapper">
-				<label for="inputEmail" class="sr-only">Username</label>
+				<label for="inputEmail" class="sr-only">Username *</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.username') ? phptal.Form.error('User.username') : '' "></tal:block>
-				<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder="Username"  />
+				<input type="text" name="data[User][username]" id="inputEmail" class="form-control" placeholder=""  />
 			</div>
 			
 			<div class="input-wrapper">
-				<label for="inputPassword" class="sr-only">Password</label>
+				<label for="inputPassword" class="sr-only">Password *</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.password') ? phptal.Form.error('User.password') : '' "></tal:block>
-				<input type="password" name="data[User][password]"  id="inputPassword" class="form-control" placeholder="Password"/>
+				<input type="password" name="data[User][password]"  id="inputPassword" class="form-control" placeholder=""/>
 			</div>
 
 			<div class="input-wrapper">
-				<label for="inputEmployeeID" class="sr-only">Employee ID</label>
+				<label for="inputEmployeeID" class="sr-only">Employee ID *</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.employee_id') ? phptal.Form.error('User.employee_id') : '' "></tal:block>
-				<input type="text" name="data[User][employee_id]" id="inputEmployeeID" class="form-control" placeholder="Employee ID"  />
+				<input type="text" name="data[User][employee_id]" id="inputEmployeeID" class="form-control" placeholder=""  />
 			</div>
 			
 			<div class="input-wrapper">
-				<label for="inputName" class="sr-only">Name</label>
+				<label for="inputName" class="sr-only">Name *</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.name') ? phptal.Form.error('User.name') : '' "></tal:block>
-				<input type="text" name="data[User][name]" id="inputName" class="form-control" placeholder="Name"/>
+				<input type="text" name="data[User][name]" id="inputName" class="form-control" placeholder=""/>
 			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputNumber" class="sr-only">Number</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.number') ? phptal.Form.error('User.number') : '' "></tal:block>
-				<input type="text" name="data[User][number]" id="inputNumber" class="form-control" placeholder="Number"/>
+				<input type="text" name="data[User][number]" id="inputNumber" class="form-control" placeholder=""/>
 			</div>
 			
 			<div class="input-wrapper">
+				<label for="inputNumber" class="sr-only">Role</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.level') ? phptal.Form.error('User.level') : '' "></tal:block>
 				<select class="form-control" name="data[User][level]" >
 					<option value='0'>Admin</option>
@@ -44,6 +45,7 @@
 			</div>
 
 			<div class="input-wrapper">
+				<label for="inputNumber" class="sr-only">Status</label>
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('User.status') ? $this->Form->error('User.status') : '' " ></tal:block>
 				<select class="form-control" name="data[User][status]" >
 					<option value='0'>Active</option>

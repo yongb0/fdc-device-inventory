@@ -27,13 +27,13 @@
 	
 	Router::redirect('/', array('controller' => 'users', 'action' => 'index'));
 	
-	Router::connect('/device-categories', ['controller' => 'deviceCategories']);
+	Router::connect('/device-categories', array('controller' => 'deviceCategories'));
 
-	Router::connect('/device-categories/:action/*', ['controller' => 'deviceCategories']);
+	Router::connect('/device-categories/:action/*', array('controller' => 'deviceCategories'));
 
 	Router::connect('/borrow/:action/*', array('controller' => 'borrowers') );
 
-	Router::connect('/borrow/return-device/:id', array('controller' => 'borrowers', 'action' => 'returnDevice'), array('id' => '\d+', 'pass' => ['id']) );
+	Router::connect('/borrow/return-device/:id', array('controller' => 'borrowers', 'action' => 'returnDevice'), array('id' => '\d+', 'pass' => 'id') );
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

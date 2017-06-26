@@ -17,7 +17,7 @@ class DevicesController extends AppController {
     public function index() {
         $this->_set_meta('Devices','','');
         $categories = new DeviceCategory();
-        $categoriesData = $categories->find('all',['fields' => ['name','category_id']]);
+        $categoriesData = $categories->find('all',array('fields' => array('name','category_id')));
         $borrower = $this->Device->Borrower->find('all', array(
             'fields' => array('Borrower.device_id','borrowed_date','return_date','User.employee_id','User.name','User.user_id','borrower_id'),
             'conditions'=>array('return_date'=>'0000-00-00 00:00:00'),
@@ -52,11 +52,10 @@ class DevicesController extends AppController {
         $this->_set_meta('Add Device','','');
         $this->set(
             'categories',
-            $categories->find('all',[
+            $categories->find('all',array(
                 'recursive' => -1,
-                'contain' => [],
-                'fields' => ['name','category_id']
-            ])
+                'fields' => array('name','category_id')
+            ))
         );
 
         if ($this->request->is('post')) {
@@ -74,11 +73,10 @@ class DevicesController extends AppController {
         $categories = new DeviceCategory();
         $this->set(
             'categories',
-            $categories->find('all',[
+            $categories->find('all',array(
                 'recursive' => -1,
-                'contain' => [],
-                'fields' => ['name','category_id']
-            ])
+                'fields' => array('name','category_id')
+            ))
         );
         $this->_set_meta('Edit Device','','');
         $this->Device->id = $id;

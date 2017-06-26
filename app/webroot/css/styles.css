@@ -9,7 +9,7 @@
 }
 
 
-/*-------------- form ----------------*/
+/*-------------- form and form components ----------------*/
 
 .form-control{
 	margin-bottom: 10px;
@@ -63,6 +63,28 @@ form .btn{
     margin-right: auto;
     margin-left: auto;
 }
+
+.add-form form{
+    margin-top: 1.5em;
+}
+
+.add-form .sr-only{
+    position: relative;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}
+
+.add-form .form-control{
+    margin-bottom: 13px;
+    margin-top: 5px;
+}
+
+.add-form .error-message{
+    display:inline-block;
+    margin-left: 5px;
+}
+
 /*-------------- tables ----------------*/
 .list .table{
     margin-top:5px;
@@ -132,4 +154,34 @@ ul.col-2 li{
 
 #change-password .modal-body{
     padding: 15px 50px;
+}
+
+#result{
+    padding: 0.5em;
+    margin-top: -14px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-shadow: 3px 2px 10px #cccccc;
+    display:none;
+}
+
+#result span{
+    display:block;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#result span:hover{
+    color:gray;
+}
+
+#result .loading{
+    height:50px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#result p{
+    margin-bottom:0px;
 }

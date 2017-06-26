@@ -1,0 +1,26 @@
+<div metal:define-macro="content" class="container">
+	<div class="add-form">
+		<h3>Add Borrower</h3>
+		<tal:block tal:condition="php: isset(notification)"> 
+			<div class="${php: isset(notification[1]) ? notification[1] : ''}" tal:content="php: notification[0]"></div> 
+		</tal:block>
+		<form method="post" class="form-signin" autocomplete="off">
+			<div class="input-wrapper">
+				<label for="inputName" class="sr-only">Device Name</label>
+				<input type="text" name="" id="inputName" class="form-control" placeholder="" value="${device/Device/name | nothing}" readonly="" />
+			</div>
+
+			<div class="input-wrapper">
+				<label for="inputName" class="sr-only">Borrower User ID*</label>
+				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Borrower.user_id') ? phptal.Form.error('Borrower.user_id') : '' "></tal:block>
+				<input type="text" name="data[Borrower][user_id]" id="inputName" class="form-control searchUser" placeholder="Type to search"  />
+				<div id="result">
+					<tal:block tal:replace="structure php: phptal.Html.image('loading.gif', array('class'=>'loading'))">Loading image</tal:block>
+					<p id="result-data"></p>
+				</div>
+			</div>
+
+			<input type="submit" value="Save" class="btn btn-primary btn-block" />
+		</form>
+	</div>
+</div>

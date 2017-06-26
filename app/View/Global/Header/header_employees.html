@@ -5,11 +5,21 @@
 	    	<a class="navbar-brand" href="#">FDC Device Inventory</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	    	<li tal:attributes="class php: strpos(currentUrl, '/devices') !== false ? 'active' : '' "><a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'devices','action' => 'index'),true)">Devices</a></li>
+	    	<li tal:attributes="class php: strpos(currentUrl, '/devices') !== false ? 'active' : '' ">
+	    		<a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'devices','action' => 'index'),true)">Devices</a>
+	    	</li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
-	    	<li><a href="#" ><span class="glyphicon glyphicon-user"></span> Account </a></li>
-	    	<li><a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action' => 'logout'),true)"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+	    	<li>
+	    		<a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action' => 'account'),true)">
+	    			<span class="glyphicon glyphicon-user"></span> Account 
+	    		</a>
+	    	</li>
+	    	<li>
+	    		<a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action' => 'logout'),true)">
+	    			<span class="glyphicon glyphicon-log-in"></span> Logout 
+	    		</a>
+	    	</li>
 	    </ul>
 	</div>
 </nav>

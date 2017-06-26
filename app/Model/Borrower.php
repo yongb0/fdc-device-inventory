@@ -15,6 +15,12 @@ class Borrower extends AppModel {
     );
 
     public $validate = array(
+        'user_id' => array(
+            'required' => array(
+                'rule' => 'notEmpty',
+                'message' => 'required'
+            )
+        )
     );
 
 }

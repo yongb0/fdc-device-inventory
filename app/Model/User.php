@@ -16,30 +16,30 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => 'notEmpty',
-                'message' => 'Username is required'
+                'message' => 'required'
             ),
             'isUnique' => array(
               'rule' => 'isUnique',
-              'message' => 'Username is already used.'
+              'message' => 'is already used.'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => 'notEmpty',
                 'on' => 'create',
-                'message' => 'Password is required'
+                'message' => 'required'
             )
         ),
         'employee_id' => array(
             'required' => array(
                 'rule' => 'notEmpty',
-                'message' => 'Employee ID is required'
+                'message' => 'required'
             )
         ),
         'name' => array(
             'required' => array(
                 'rule' => 'notEmpty',
-                'message' => 'Name is required'
+                'message' => 'required'
             )
         ),
         'level' => array(

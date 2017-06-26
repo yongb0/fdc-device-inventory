@@ -60,8 +60,9 @@ class AppController extends Controller {
                     'passwordHasher' => 'Blowfish'
                 )
             ),
-            'authorize' => ['Controller']
-        )
+            'authorize' => array('Controller')
+        ),
+        'RequestHandler'
     );
 
     public function beforeFilter() {

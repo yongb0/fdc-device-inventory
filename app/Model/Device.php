@@ -21,7 +21,7 @@ class Device extends AppModel {
        'name' => array(
             'required' => array(
                 'rule' => 'notEmpty',
-                'message' => 'Name is required'
+                'message' => 'required'
             )
         )
     );

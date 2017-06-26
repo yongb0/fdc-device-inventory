@@ -57,14 +57,23 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <!-- for setting borrowers -->
+                                        <a tal:define="deviceId device/device_id; borrowed_date borrower/${deviceId}/Borrower/borrowed_date | nothing" tal:condition="php: isset(role) && role EQ 'admin' && empty(borrowed_date) " tal:content="structure php: phptal.Html.link('Set Borrower', array('controller'=>'borrowers','action'=>'add', device['device_id']) )">
+                                        </a>
+                                    </li>
+                                    <li>
                                         <!-- for borrowing -->
                                         <tal:block  tal:define="deviceId device/device_id; returned_date borrower/${deviceId}/Borrower/returned_date | nothing; borrowed_date borrower/${deviceId}/Borrower/borrowed_date | nothing" tal:condition="php: isset(role) && role EQ 'employee' && (empty(borrowed_date) || !empty(returned_date)) && device['status'] EQ 0" tal:content="structure php: phptal.Form.postLink('Borrow', array('controller'=>'borrowers','action'=>'borrow', device['device_id']))">
                                         </tal:block>
                                     </li>
                                     <li>
+                                        <!-- for admin return -->
+                                       <tal:block tal:define="deviceId device/device_id | nothing; returned_date borrower/${deviceId}/Borrower/returned_date | nothing; borrowed_date borrower/${deviceId}/Borrower/borrowed_date | nothing; user_id borrower/${deviceId}/User/user_id | nothing" tal:condition="php: isset(role) && role EQ 'admin' && (!empty(borrowed_date) || empty(returned_date)) && device['status'] EQ 0 && isset(borrower[deviceId])" tal:content="structure php: phptal.Form.postLink('Return', array('controller'=>'borrowers','action'=>'returnDevice', borrower[deviceId]['Borrower']['borrower_id']))">
+                                        </tal:block>
+                                    </li>
+                                    <li>
                                         <!-- for returning -->
-                                        <tal:block tal:define="deviceId device/device_id; returned_date borrower/${deviceId}/Borrower/returned_date | nothing; borrowed_date borrower/${deviceId}/Borrower/borrowed_date | nothing; user_id borrower/${deviceId}/User/user_id | nothing" tal:condition="php: isset(role) && role EQ 'employee' && phptal.Session.read('Auth.User.user_id') EQ user_id && (!empty(borrowed_date) || empty(returned_date)) && device['status'] EQ 0" tal:content="structure php: phptal.Form.postLink('Return', array('controller'=>'borrowers','action'=>'returnDevice', borrower[deviceId]['Borrower']['borrower_id']))">
-                                            
+                                        <tal:block tal:define="deviceId device/device_id; returned_date borrower/${deviceId}/Borrower/returned_date | nothing; borrowed_date borrower/${deviceId}/Borrower/borrowed_date | nothing; user_id borrower/${deviceId}/User/user_id | nothing" tal:condition="php: isset(role) && role EQ 'employee' && phptal.Session.read('Auth.User.user_id') EQ user_id && (!empty(borrowed_date) || empty(returned_date)) && device['status'] EQ 0 && isset(borrower[deviceId])" tal:content="structure php: phptal.Form.postLink('Return', array('controller'=>'borrowers','action'=>'returnDevice', borrower[deviceId]['Borrower']['borrower_id']))">
                                         </tal:block>
                                     </li>
                                     <li>
