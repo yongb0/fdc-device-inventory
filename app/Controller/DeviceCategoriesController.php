@@ -16,6 +16,17 @@ class DeviceCategoriesController extends AppController {
     public function index() {
         $this->_set_meta('Device Categories','','');
         $this->DeviceCategory->recursive = 0;
+        if($this->request->is('get') && isset($this->request->query['search'])){
+            $keyword = $this->request->query['keyword']; 
+            $this->paginate = array('DeviceCategory' => 
+                array(
+                    'conditions' => array(
+                        'name LIKE' => "%".$keyword."%"
+                    ),
+                    'limit'=>10
+                )
+            );
+        }
         $this->set('categories', $this->paginate());
         $this->set('actionEdit', Router::url('/device-categories/edit'));
         $this->set('actionView', Router::url('/device-categories/view'));
@@ -73,7 +84,10 @@ class DeviceCategoriesController extends AppController {
         }
         if ($this->DeviceCategory->delete()) {
             return $this->redirect(array('action' => 'index'));
+        }else{
+            $this->Session->setFlash(__('Can\'t delete because it has records. Failed to delete.'), 'default', array('class' => 'alert alert-danger'), 'bad');
         }
+        $this->Session->setFlash(__('Can\'t delete because it has records. Failed to delete.'), 'default', array('class' => 'alert alert-danger'), 'bad');
         return $this->redirect(array('action' => 'index'));
     }
 

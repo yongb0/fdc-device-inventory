@@ -17,12 +17,39 @@ class DevicesController extends AppController {
     public function index() {
         $this->_set_meta('Devices','','');
         $categories = new DeviceCategory();
-        $categoriesData = $categories->find('all',array('fields' => array('name','category_id')));
+        $categories->Behaviors->attach('Containable');
+        $conditions['Borrower'] = array();
+        $conditions['Device'] = array();
+        if($this->request->is('post') && isset($this->request->data['display'])){
+            if($this->request->data['display'] == 0){
+               $conditions['Device']['Device.in_use'] = 'false';
+            }else if($this->request->data['display'] == 1){
+                $conditions['Device']['Device.in_use'] = 'true';
+            }
+            if($this->request->data['product_no'] != "" ){
+                $conditions['Device']['Device.product_no LIKE'] = "%".$this->request->data['product_no']."%";
+            }
+            if($this->request->data['name'] != "" ){
+                $conditions['Device']['Device.name LIKE'] = "%".$this->request->data['name']."%";
+            }
+        }else{
+            
+        }
+        $categoriesData = $categories->find('all', 
+            array(
+                'contain' => array('Device'=>array(
+                    'conditions' => $conditions['Device']
+                    )
+                )
+            )
+        );
+
         $borrower = $this->Device->Borrower->find('all', array(
             'fields' => array('Borrower.device_id','borrowed_date','return_date','User.employee_id','User.name','User.user_id','borrower_id'),
-            'conditions'=>array('return_date'=>'0000-00-00 00:00:00'),
+            'conditions'=>array('return_date' => '0000-00-00 00:00:00'),
             'key' => 'Borrower.device_id'                                                              
         ));
+         
         $borrower = Hash::combine($borrower, '{n}.Borrower.device_id', '{n}');
         $this->set('borrower', $borrower);
         $this->set('categories', $categoriesData);
@@ -65,7 +92,7 @@ class DevicesController extends AppController {
                 return $this->redirect(array('action' => 'index'));
             }
         
-            $this->set('notification', array('The category could not be saved. Please see errors', 'alert alert-danger'));
+            $this->set('notification', array('The device could not be saved. Please see errors', 'alert alert-danger'));
         }
     }
 
@@ -104,6 +131,8 @@ class DevicesController extends AppController {
         }
         if ($this->Device->delete()) {
             return $this->redirect(array('action' => 'index'));
+        }else{
+            $this->Session->setFlash(__('Can\'t delete because it has records. Failed to delete.'), 'default', array('class' => 'alert alert-danger'), 'bad');
         }
         return $this->redirect(array('action' => 'index'));
     }

@@ -85,6 +85,21 @@ form .btn{
     margin-left: 5px;
 }
 
+#search-form{
+    width: 100%;
+    display: block;
+    margin-top: 1em;
+}
+
+#search-form input[type="text"]{
+    width: 15%;
+    display: inline-block;
+}
+
+#search-form button{
+    display:inline-block!important;
+}
+
 /*-------------- tables ----------------*/
 .list .table{
     margin-top:5px;
@@ -184,4 +199,75 @@ ul.col-2 li{
 
 #result p{
     margin-bottom:0px;
+}
+
+
+#for-print-container{
+    clear:both;
+    background: gray;
+    padding: 2em;
+    overflow: auto;
+    max-height: 50em;
+    /*position:  relative;*/
+    min-height: 20em;
+}
+
+#for-print{
+    background:white;
+    padding:2em;
+}
+
+#for-print table{
+    margin-top:1em;
+}
+
+#for-print-container #export{
+    color: white;
+    font-size: 28px;
+    position: relative;
+    background: black;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 3px 7px 7px #cccccc;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#for-print-container #export:hover{
+    /*color:gray;*/
+    background:#383737;
+}
+
+#for-print-container .icons{
+    position: absolute;
+    margin-top: -9px;
+}
+
+#for-print-container #btnExport{
+    border: 0px;
+    background: black;
+    color: white;
+    padding: 7px;
+    border-radius: 50%;
+    box-shadow: 3px 7px 7px #cccccc;
+    cursor: pointer;
+    font-size: 21px;
+    position: relative;
+    width: 45px;
+    top: -5px;
+    margin-left: 5px;
+}
+
+.top-content input[type="submit"]{
+    display:inline-block!important;
+}
+
+.top-content form{
+    padding: 1em 0em;
+}
+
+.top-content form .form-control{
+    width: auto;
+    margin: 0px;
+    display: inline-block;
 }

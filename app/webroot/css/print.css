@@ -1,0 +1,35 @@
+@page {
+	margin: 0cm;
+	padding:2em;
+}
+
+#header{
+	display:none;
+}
+#footer{
+	display:none;
+}
+
+div{
+	visibility: hidden;
+}
+
+h3{
+	display: none;
+}
+
+#for-print{
+	visibility: visible;
+	position: 	relative;
+}
+
+#for-print table{
+    margin-top:2em;
+    width:90%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.red{
+    color:red!important;
+}

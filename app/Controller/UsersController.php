@@ -17,6 +17,23 @@ class UsersController extends AppController {
     public function index() {
         $this->_set_meta('Users','','');
         $this->User->recursive = 0;
+        if($this->request->is('get') && isset($this->request->query['search'])){
+            $keyword = $this->request->query['keyword']; 
+            $this->paginate = array('User' => 
+                array(
+                    'conditions' => array(
+                        'OR' => array(
+                           'user_id LIKE' => "%".$keyword."%",
+                           'username LIKE' => "%".$keyword."%",
+                           'employee_id LIKE' => "%".$keyword."%",
+                           'name LIKE' => "%".$keyword."%"
+                        )
+                    ),
+                    'limit' => 10
+                )
+            );
+        }
+       
         $this->set('users', $this->paginate());
         $this->set('actionEdit', Router::url(array('controller' => strtolower($this->name), 'action' => 'edit')));
         $this->set('actionView', Router::url(array('controller' => strtolower($this->name), 'action' => 'view')));
@@ -137,24 +154,27 @@ class UsersController extends AppController {
             );
             return json_encode($users);
         }
-        // echo "haahah";
-        // $this->request->is('post');
-        // $this->view='index';
-        // if ($this->request->is('ajax') && isset($this->request->data['keyword']) && !empty($this->request->data['keyword'])  ) {
-            // $users = $this->User->find('all',
-            //     array(
-            //         'conditions' => array(
-            //            "OR" => array(
-            //                 "name LIKE" => "%".$this->request->data['keyword']."%",
-            //                 "username LIKE" => "%".$this->request->data['keyword']."%",
-            //                 "employee_id LIKE" => "%".$this->request->data['keyword']."%",
-            //             ) 
-            //         )
-            //     )
-            // );
-            // $this->set('users', $this->paginate());
-        // }
-        // return json_encode($this->data);
+    }
+
+    public function search2() {
+        $this->view='index';
+        if( $this->request->is('ajax') ) {
+            $users = $this->User->find('all',
+                array(
+                    'recursive' =>  -1,
+                    'conditions' => array(
+                       "OR" => array(
+                            "name LIKE" => "%".$this->request->data['keyword']."%",
+                            "username LIKE" => "%".$this->request->data['keyword']."%",
+                            "employee_id LIKE" => "%".$this->request->data['keyword']."%",
+                        ) 
+                    )
+                )
+            );
+            
+        }
+        $this->set('users', $this->paginate());
+        return json_encode($this->paginate());
     }
 
     public function logout() {

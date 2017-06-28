@@ -18,5 +18,14 @@ class DeviceCategory extends AppModel {
         )
     );
 
+    public function beforeDelete($cascade = true) {
+        $count = $this->Device->find("count", array(
+            "conditions" => array("Device.category_id" => $this->id)
+        ));
+        if ($count == 0) {
+            return true;
+        }
+        return false;
+    }
 }
 ?>

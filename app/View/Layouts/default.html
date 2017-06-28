@@ -4,9 +4,12 @@
 	<title tal:content="php: isset(meta_title) ? meta_title : '' "></title>
 	<link href="/inventory/favicon.ico" type="image/x-icon" rel="shortcut icon" tal:attributes="href php: PhptalView::getCacheDisabledPath('/favicon.ico')" />
 	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/bootstrap.min.css')" />
-	<link href="/css/styles.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/styles.css')" />
+	<link href="/css/jquery-ui.css" rel="stylesheet" type="text/css" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/jquery-ui.css')" />
+	<link href="/css/styles.css" rel="stylesheet" type="text/css" media="screen" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/styles.css')" />
+	<link href="/css/print.css" rel="stylesheet" type="text/css" media="print" tal:attributes="href php: PhptalView::getCacheDisabledPath('/css/print.css')" />
 	<script src="/js/jquery.min.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/jquery.min.js')"></script>
 	<script src="/js/bootstrap.min.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/bootstrap.min.js')"></script>
+	<script src="/js/jquery-ui.min.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/jquery-ui.min.js')"></script>
 	<script src="/js/myjs.js" type="text/javascript" tal:attributes="src php: PhptalView::getCacheDisabledPath('/js/myjs.js')"></script>
 </head>
 <body>

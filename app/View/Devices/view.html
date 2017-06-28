@@ -3,9 +3,11 @@
 	<ul class="list-inline col-md-12 col-sm-12 col-xs-12 list-details col-2">
 		<li class="title">Name: </li>
 		<li tal:condition="exists:device/Device/name" tal:content="device/Device/name">name</li>
-		<li class="title">Details</li>
+		<li class="title">Product Number: </li>
+		<li tal:content="device/Device/product_no | nothing">details</li>
+		<li class="title">Details:</li>
 		<li tal:content="device/Device/description | nothing">details</li>
-		<li class="title">Category</li>
+		<li class="title">Category:</li>
 		<li tal:content="device/DeviceCategory/name | nothing">category</li>
 	</ul>
 </div>

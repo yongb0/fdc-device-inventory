@@ -1,0 +1,53 @@
+<div metal:define-macro="content" class="container list">
+    <h3 class="col-md-12 col-sm-12 col-xs-12 padding-0">
+        <span class="">Device Usage Report</span>
+        <form id="search-form" action="" method="post">
+            <input type="text" name="date" data-fetch="users" class="form-control datepicker" placeholder="Date Borrowed"/>
+            <input type="text" name="returnedDate" data-fetch="users" class="form-control datepicker" placeholder="Date Returned"/>
+            <input type="text" name="device" data-fetch="users" class="form-control" placeholder="Device Name"/>
+            <input type="text" name="product_no" data-fetch="users" class="form-control" placeholder="Product Number"/>
+            <input type="text" name="employee_id" data-fetch="users" class="form-control" placeholder="Employee ID"/>
+            <input type="text" name="employee_name" data-fetch="users" class="form-control" placeholder="Employee Name"/>
+            <button type="submit" class="btn"><i class="glyphicon glyphicon-search" /></button>
+        </form>
+    </h3>
+
+    <div id="for-print-container">
+        <div class="icons">
+            <a href="#" class="glyphicon glyphicon-download" id="export" title="Download to csv"></a>
+            <button id="btnExport" title="Download to xls"><i class="glyphicon glyphicon-download-alt"/></button> 
+        </div>
+        <div id="for-print">
+            <table class="table" id="printTable">
+                <tr>
+                    <th colspan='5' style='text-align:center;border:0px'><h2 style='margin:0px;'><font color="#ff0000">FDC Device Inventory</font></h2></th>
+                </tr>
+                <tr>
+                    <th colspan='5' style='text-align:center;border:0px'><h4 style='margin:0px'>Device Usage Report</h4></th>
+                </tr>
+                <tr>
+                    <th colspan='5' style='text-align:center;border:0px'><h4 style='margin:0px 0px 1em 0px'>Borrowed Date : <span tal:condition="exists: date" tal:content="php: date != '' ? date('F jS, Y', strtotime(date)) : 'All'"></span></h4></th>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <th>Device</th>
+                    <th>Product Number</th>
+                    <th>Borrowed Date/Time</th>
+                    <th>Returned Date/Time</th>
+                    <th style='text-align:left'>Employee ID</th>
+                    <th>Name</th>
+                </tr>
+
+                <tr tal:repeat="datum data">
+                    <td tal:content="datum/Device/name" > Device </td>
+                    <td tal:content="datum/Device/product_no" > Product Number </td>
+                    <td tal:define="borrowedDate datum/Borrower/borrowed_date | nothing" tal:content="php: (borrowedDate=='0000-00-00 00:00:00') ? '' : date('F jS, Y, g:i a', strtotime(borrowedDate))"> Borrowed Date</td>
+                    <td tal:define="returnDate datum/Borrower/return_date | nothing" tal:content="php: (returnDate=='0000-00-00 00:00:00') ? 'Not yet returned' : date('F jS, Y, g:i a', strtotime(returnDate))"> Return Date</td>
+                    <td style='text-align:left' tal:content="datum/User/employee_id"> Employee ID </td>
+                    <td tal:content="datum/User/name"> Name </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

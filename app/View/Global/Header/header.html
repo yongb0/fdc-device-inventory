@@ -8,6 +8,7 @@
 	    	<li tal:attributes="class php: strpos(currentUrl, '/users') !== false ? 'active' : '' " ><a href="#" class="active" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action' => 'index'),true)">Users</a></li>
 	      	<li tal:attributes="class php: strpos(currentUrl, '/device-categories/') !== false ? 'active' : '' "><a href="#" tal:attributes="href php: phptal.Html.url('/device-categories/',true)">Categories</a></li>
 	      	<li tal:attributes="class php: strpos(currentUrl, '/devices') !== false ? 'active' : '' "><a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'devices','action' => 'index'),true)">Devices</a></li>
+	      	<li tal:attributes="class php: strpos(currentUrl, '/deviceUsageReport') !== false ? 'active' : '' "><a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'borrowers','action' => 'deviceUsageReport'),true)">Device Usage Report</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	      	<li><a href="#" tal:attributes="href php: phptal.Html.url(array('controller' => 'users','action' => 'account'),true)"><span class="glyphicon glyphicon-user"></span> Account </a></li>

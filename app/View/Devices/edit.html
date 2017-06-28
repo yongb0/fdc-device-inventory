@@ -10,6 +10,12 @@
 				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.name') ? phptal.Form.error('Device.name') : '' "></tal:block>
 				<input type="text" name="data[Device][name]" id="inputName" class="form-control" placeholder="" value="${device/Device/name | nothing}" />
 			</div>
+
+			<div class="input-wrapper">
+				<label for="inputDescription" class="sr-only">Product Number</label>
+				<tal:block class="error" tal:content="structure php: phptal.Form.isFieldError('Device.product_no') ? phptal.Form.error('Device.product_no') : '' "></tal:block>
+				<input type="text" name="data[Device][product_no]"  id="inputDescription" class="form-control" placeholder="" value="${device/Device/product_no | nothing}"/>
+			</div>
 			
 			<div class="input-wrapper">
 				<label for="inputDescription" class="sr-only">Details</label>
